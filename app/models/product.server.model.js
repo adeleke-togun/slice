@@ -57,7 +57,7 @@ var ProductSchema = new Schema ({
 		ref: 'User'
 	},
 	title: {
-		required: 'The product being reviewed should have a name, don\'t you think'
+		required: 'The product being reviewed should have a name, don\'t you think',
 		type: String,
 		default: ''
 	},

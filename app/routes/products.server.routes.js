@@ -3,11 +3,13 @@
 /**
  * Module dependencies.
  */
-var users = require('../../app/controllers/users'),
-	products = require('../../app/controllers/products');
 
 module.exports = function(app) {
-	// Article Routes
+	var users = require('../../app/controllers/users');
+	var products = require('../../app/controllers/products');
+	var reviews = require('../../app/controllers/reviews');
+
+	// Products Routes
 	app.route('/products')
 		.get(products.list)
 		.post(products.create);
@@ -17,6 +19,16 @@ module.exports = function(app) {
 		.put(products.update)
 		.delete(products.delete);
 
-	// Finish by binding the article middleware
+	app.route('/products/:productId/reviews')
+		.get(reviews.list)
+		.post(reviews.addReview);
+
+	app.route('/products/:productId/reviews/:reviewId')
+		.delete(reviews.deleteReview)
+
+	// Finish by binding the product middleware
 	app.param('productId', products.productByID);
+
+	//Finish by binding the review middleware
+	// app.param('reviewId', reviews.reviewByID);
 };
